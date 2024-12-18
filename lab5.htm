@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шагайн Морьны  Уралдаан</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .race-track {
+            position: relative;
+            width: 80%;
+            margin: 20px auto;
+            border-bottom: 2px dashed black;
+            height: 100px;
+        }
+        .horse {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+        }
+        #horse1 {
+            top: 10px;
+            left: 0;
+        }
+        #horse2 {
+            top: 60px;
+            left: 0;
+        }
+        .finish-line {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 10px;
+            height: 100px;
+            background: repeating-linear-gradient(
+                45deg,
+                black,
+                black 10px,
+                white 10px,
+                white 20px
+            );
+        }
+        button {
+            font-size: 18px;
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #results {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .player-label {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(0, 0, 0, 0.4); 
+            font-weight: bold;
+            z-index: -1;
+        }
+        #label1 {
+            top: 10px;
+            left: 100px; 
+        }
+        #label2 {
+            top: 60px;
+            left: 100px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Шагайн Морь Уралдаан</h1>
+    <div class="race-track">
+        <img src="c:/Users/user/Pictures/horse.jpg" alt="Horse 1" id="horse1" class="horse">
+        <img src="c:/Users/user/Pictures/horse.jpg" alt="Horse 2" id="horse2" class="horse">
+        <div class="finish-line"></div>
+        
+        <div id="label1" class="player-label">Тоглогч 1</div>
+        <div id="label2" class="player-label">Тоглогч 2</div>
+    </div>
+    
+    <button id="player1Btn" onclick="rollShagai(1)">Тоглогч 1 шагай орхи</button>
+    <button id="player2Btn" onclick="rollShagai(2)" disabled>Тоглогч 2 шагай орхи</button>
+    <div id="results"></div>
+
+    <script>
+        let turn = 1;  
+        let horse1Position = 0;
+        let horse2Position = 0;
+        const finishLine = document.querySelector(".race-track").offsetWidth - 60;
+
+        function rollShagai(player) {
+            if (horse1Position >= finishLine || horse2Position >= finishLine) return;
+
+            const roll = Math.floor(Math.random() * 6) + 1;
+            if (player === 1) {
+                horse1Position += roll * 10;
+                document.getElementById("horse1").style.left = horse1Position + "px";
+                document.getElementById("results").innerText = `Тоглогч 1 шагай орхи: ${roll}, Морины байрлал: ${horse1Position}`;
+            } else {
+                horse2Position += roll * 10;
+                document.getElementById("horse2").style.left = horse2Position + "px";
+                document.getElementById("results").innerText = `Тоглогч 2 шагай орхи: ${roll}, Морины байрлал: ${horse2Position}`;
+            }
+
+            if (horse1Position >= finishLine || horse2Position >= finishLine) {
+                declareWinner();
+            } else {
+                changeTurn();
+            }
+        }
+
+        function changeTurn() {
+            if (turn % 2 === 0) {
+                document.getElementById("player1Btn").disabled = false;
+                document.getElementById("player2Btn").disabled = true;
+            } else {
+                document.getElementById("player1Btn").disabled = true;
+                document.getElementById("player2Btn").disabled = false;
+            }
+            turn++;
+        }
+
+        function declareWinner() {
+            let winner = "";
+            if (horse1Position >= finishLine && horse2Position >= finishLine) {
+                winner = "Хоёр морь зэрэг барианд хүрлээ!";
+            } else if (horse1Position >= finishLine) {
+                winner = "1-р Морь Яллаа!";
+            } else if (horse2Position >= finishLine) {
+                winner = "2-р Морь Яллаа!";
+            }
+
+            document.getElementById("results").innerText += `\n${winner}`;
+            document.getElementById("player1Btn").disabled = true;
+            document.getElementById("player2Btn").disabled = true;
+        }
+    </script>
+</body>
+</html>

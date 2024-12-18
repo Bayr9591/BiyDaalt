@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAB2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            background-color: #55a2d6;
+            padding: 10px;
+            justify-content: space-around;
+        }
+        .header button {
+            padding: 10px 20px;
+            background-color: #f7f7f7;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .sidebar {      
+            width: 25%;
+            padding: 65px;
+            background-color: #d3d2d2;
+            text-align: center;
+        }
+        .sidebar img {
+            width: 300px;
+            height: 325px;
+            border-radius: 90%;
+            margin-bottom: 15px;
+        }
+        .content {
+            width: 75%;
+            padding: 20px;
+            background-color: #ccfcf1;
+            text-align: center;
+            font-size: 25px;
+        }
+        .footer {
+            background-color: #F1948A;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .container {
+            display: flex;
+        }
+        .section {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .image-container img, .video-container video {
+            width: 300px;
+            height: 300px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            margin-top: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <button onclick="toggleSection('home-section')">Нүүр хуудас</button>
+        <button onclick="toggleSection('image-section')">Зурагнууд</button>
+        <button onclick="toggleSection('video-section')">Бичлэгүүд</button>
+        <button onclick="toggleSection('map-section')">Газрын зураг</button>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <img src="5.jpg" alt="profile">
+            <p>Хувийн мэдээлэл</p>
+            <p>Нэр: Баярцогт</p>
+            <p>Нас: 18 </p>
+            <p>Холбоо барих: email@example.com</p>
+        </div>
+
+        <div class="content">
+            <!--Nuur huudas-->
+            <div id="home-section" class="section hidden">
+                <img src="1.jpg" alt="zurag 1" style="width: 350px; height: 400px;">
+                <img src="2.jpg" alt="zurag 2" style="width: 350px; height: 400px;">
+            </div>
+
+            <!--zuragnuud-->
+            <div id="image-section" class="section hidden">
+                <h2>Зурагнууд</h2>
+                <div class="image-container">
+                    <img src="4.jpg" alt="zurag 1">
+                    <img src="5.jpg" alt="zurag 2">
+                    <img src="6.jpg" alt="zurag 3">
+                </div>
+            </div>
+
+          <!--bicleguud-->
+            <div id="video-section" class="section hidden">
+                <h2>Бичлэгүүд</h2>
+                <div class="video-container">
+                    <iframe width="300" height="300" src="https://www.youtube.com/embed/Er82bryJwVs?si=umUMqU26IvRs4neJ"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+                
+        <iframe width="300" height="300" src="https://www.youtube.com/embed/YDTHju04dRc?si=sV_lWZ-B266j7yro&amp;start=7"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+    </div>
+</div>
+
+
+            <!--gazriin zurag-->
+            <div id="map-section" class="section hidden">
+                <h2>Газрын зураг</h2>
+                <div class="map-container">
+                    <!--google map-->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2673.916685823342!2d106.93073799999999!3d47.91864949999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d96923ec467a403%3A0x43f8299e566d0442!2sUniversity%20of%20Finance%20%26%20Economics%20(UFE)!5e0!3m2!1sen!2smn!4v1731476390370!5m2!1sen!2smn" width="99%" height="99%" style="border:5px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Гэрийн хаяг: Ulaanbaatar Mongolia
+    </div>
+
+    <script>
+        // tus tusad n neeh haah
+        function toggleSection(sectionId) {
+            // buh hesguudiin nuutslah
+            var sections = document.querySelectorAll('.section');
+            sections.forEach(function(section) {
+                section.classList.add('hidden');
+            });
+
+            //tuhain hesgiig neeh
+            var section = document.getElementById(sectionId);
+            section.classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html> 

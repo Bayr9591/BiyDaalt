@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хэрэглэгчийн бүртгэл</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 80%;
+            display: flex;
+        }
+        .form-container {
+            width: 50%;
+            padding-right: 20px;
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-input {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-input input {
+            width: 70%;
+            padding: 8px;
+            border: 3px solid #5c8ef3;
+            border-radius: 8px;
+            background-color: rgb(225, 225, 228);
+
+        }
+       
+        .form-input label {
+            width: 25%;
+            font-weight: bold;
+        }
+        .button {
+            display: block;
+            width: 100px;
+            margin: 10px auto;
+            padding: 10px;
+            background-color: rgb(225, 225, 228);
+            color: black;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 3px solid #5c8ef3;
+        }
+        .button:hover {
+            background-color: #5c8ef3;
+        }
+        .table-container {
+            width: 50%;
+            padding-right: 50px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 2px solid #b60f14;
+            background-color: rgb(225, 225, 228);
+        }
+        table, th, td {
+            border: 3px solid #5c8ef3;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        .delete-button {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h2>Хэрэглэгчийн бүртгэл</h2>
+        <div class="form-input">
+            <input type="text" id="surname" placeholder="Овог...">
+        </div>
+        <div class="form-input">
+            <input type="text" id="name" placeholder="Нэр...">
+        </div>
+        <div class="form-input">
+            <input type="number" id="age" placeholder="Нас...">
+        </div>
+        <button class="button" onclick="registerUser()">Бүртгэх</button>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Овог</th>
+                    <th>Нэр</th>
+                    <th>Нас</th>
+                    <th>Үйлдэл</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    let userCount = 0; 
+
+    function registerUser() {
+        const surname = document.getElementById("surname").value;
+        const name = document.getElementById("name").value;
+        const age = document.getElementById("age").value;
+
+        if (surname && name && age) {
+            userCount++; 
+            const userTableBody = document.getElementById("userTableBody");
+
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td>${userCount}</td>
+                <td>${surname}</td>
+                <td>${name}</td>
+                <td>${age}</td>
+                <td><span class="delete-button" onclick="deleteUser(this)">❌</span></td>
+            `;
+
+            userTableBody.appendChild(newRow);
+
+            document.getElementById("surname").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("age").value = "";
+        } else {
+            alert("Бүх талбарыг бөглөнө үү.");
+        }
+    }
+
+    function deleteUser(button) {
+        const row = button.parentElement.parentElement;
+        row.remove();
+        
+        let rows = document.querySelectorAll("#userTableBody tr");
+        rows.forEach((row, index) => {
+            row.cells[0].textContent = index + 1; 
+        });
+    }
+</script>
+
+</body>
+</html>
